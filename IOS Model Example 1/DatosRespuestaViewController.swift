@@ -11,6 +11,8 @@ import UIKit
 class DatosRespuestaViewController: UIViewController {
     
     var resultadoSeleccionado:Array<Any> = []
+    
+    var contenidoTemasSeleccionados = ""
 
     @IBOutlet weak var lblseleccionados: UILabel!
     
@@ -45,15 +47,63 @@ class DatosRespuestaViewController: UIViewController {
             var fila = arraySectionAndRows[1]
             //fila.substring(to: fila.index(before: fila.endIndex)) este metodo lo que haces es eliminar el ultimo
             //caracter de nuestra cadena y por suerte el corchete derecho es el que queremos eliminar y se encuentra al final
-            fila =  fila.substring(to: fila.index(before: fila.endIndex))
+            fila = fila.substring(to: fila.index(before: fila.endIndex))
+            //Si nos damos cuenta en la consola ya tenemos el numero pero tiene un espacio con este metodo trimming eliminamos los
+            //espacion en blanco
+            fila = fila.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             //ahora imprimimos las variable ara saber que si nos jala la informacion
-            print("Seccion : " + seccion + " - Fila :  " + fila)
+            //print("===========================================")
+            //print("Seccion : " + seccion + " - Fila :  " + fila)
+            //print("===========================================")
             //DEbe salir en al consola : Seccion: 1 - Fila : 0
             //ahora que sabemos las filas y secciones solo es cosa de hacer los if y swtch para el texto del label que
-            //se muestra..
+            
+            //Como es un numero no deberia tener las comillas pero, en realidad es un string, tenemos dos opc, o lo ponemos con comillas o lo parseamos a int
+            //si queremos darle un salto de linea en el label usamos \n
+            if seccion == "0" {
+                switch fila {
+                case "0":
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "1.1 Vistas \n"
+                case "1":
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "1.2 Navegation \n"
+                case "2":
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "1.3 Listas Estaticas \n"
+                default:
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "1.4 Diseño Responsive \n"
+                }
+            }
+            
+            
+            if seccion == "1" {
+                switch fila {
+                case "0":
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "2.1 Gestos  \n"
+                case "1":
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "2.2 Listas Dinamicas  \n"
+                default:
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "2.3 Vistas Avanzadas  \n"
+                }
+            }
+            
+            
+            if seccion == "2" {
+                
+                switch fila {
+                case "0":
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "3.1 Web Services  \n"
+                case "1":
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "3.2 Core Data \n"
+                case "2":
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + "3.3 Ubicacion  \n"
+                default:
+                    contenidoTemasSeleccionados = contenidoTemasSeleccionados + ""
+                }
+            }
+            
+            
         }
-        
-        lblseleccionados.text = String(describing: resultadoSeleccionado)
+        //por ultimo mandamos toda la cadena con la informacion al label.
+        lblseleccionados.text = contenidoTemasSeleccionados
         
     }
 

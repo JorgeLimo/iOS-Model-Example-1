@@ -41,7 +41,7 @@ class DatosTableViewController: UITableViewController {
         
         let rows = self.tableView.indexPathsForSelectedRows?.map{$0.description}
         let viewController = segue.destination as! DatosRespuestaViewController
-        viewController.resultadoSeleccionado = String(describing: rows)
+        viewController.resultadoSeleccionado = rows!
         
     }
     

@@ -9,6 +9,9 @@
 import UIKit
 
 class DatosTableViewController: UITableViewController {
+    
+    
+    var array:Array<String> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,47 @@ class DatosTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                array.append("1.1 Vistas \n")
+            case 1:
+                array.append("1.2 Navegation \n")
+            case 2:
+                array.append("1.3 Listas Estaticas \n")
+            default:
+                array.append("1.4 Diseño Responsive \n")
+            }
+        }
+        
+        
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
+                array.append("2.1 Gestos  \n")
+            case 1:
+                array.append("2.2 Listas Dinamicas  \n")
+            default:
+                array.append("2.3 Vistas Avanzadas  \n")
+            }
+        }
+        
+        
+        if indexPath.section == 2 {
+            
+            switch indexPath.row {
+            case 0:
+                array.append("3.1 Web Services  \n")
+            case 1:
+                array.append("3.2 Core Data \n")
+            case 2:
+                array.append("3.3 Ubicacion  \n")
+            default:
+                array.append("")
+            }
+        }
+        
+        
         if indexPath.section == 2 && indexPath.row == 3 {
             self.performSegue(withIdentifier: "siguiente", sender: self)
             tableView.deselectRow(at: indexPath, animated: true)
@@ -39,9 +83,8 @@ class DatosTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         
-        let rows = self.tableView.indexPathsForSelectedRows?.map{$0.description}
         let viewController = segue.destination as! DatosRespuestaViewController
-        viewController.resultadoSeleccionado = rows!
+        viewController.arrayTemas = array
         
     }
     
